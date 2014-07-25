@@ -1,0 +1,11 @@
+[user]
+	name = Yaroslav Serhieiev
+	email = noomorph@gmail.com
+[push]
+	default = matching
+[ui]
+	color = true
+[color]
+	ui = true
+[credential]
+	helper = osxkeychain
