@@ -12,11 +12,9 @@ set relativenumber
 set splitbelow
 set splitright
 
-if has("gui_macvim")
-    set transparency=8
-    set guifont=Terminus\ (TTF):h18
-    set noanti
-endif
+au FileType python setl sw=2 sts=2 ts=2 et
+au FileType coffee setl sw=2 sts=2 ts=2 et
+au BufRead,BufNewFile *.json set filetype=json
 
 " automatic copy/paste with correct indentation
 let &t_SI .= "\<Esc>[?2004h"
@@ -110,7 +108,7 @@ call plug#begin('~/.vim/plugged')
 
 " General plugins
 Plug 'kien/ctrlp.vim'
-Plug 'airblade/vim-gitgutter' 
+Plug 'airblade/vim-gitgutter'
 Plug 'mileszs/ack.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -163,9 +161,11 @@ Plug 'cakebaker/scss-syntax.vim',  { 'for': 'scss'   }
 Plug 'heavenshell/vim-jsdoc',      { 'for': 'js'     }
 Plug 'hail2u/vim-css3-syntax',     { 'for': ['html','css'] }
 Plug 'maksimr/vim-jsbeautify',     { 'for': ['html','css', 'js' ] }
+
 vnoremap <Leader>fbh :call HtmlBeautify()<cr>
 vnoremap <Leader>fbc :call CSSBeautify()<cr>
 vnoremap <Leader>fbj :call JsBeautify()<cr>
+vnoremap <Leader>fmh :!pandoc -s -f markdown -t html -o /tmp/email-pandoc.html && juice /tmp/email-pandoc.html /tmp/email-inlined.html && cat /tmp/email-inlined.html<cr>
 
 augroup VimCSS3Syntax
   autocmd!
@@ -174,14 +174,16 @@ augroup END
 
 Plug 'Keithbsmiley/investigate.vim', { 'for': ['html','css', 'javascript'] }
 nnoremap <Leader>1 :call investigate#Investigate()<CR>
-Plug 'scrooloose/syntastic', { 'for': ['ruby','html','css', 'javascript', 'haml'] }
+Plug 'scrooloose/syntastic', { 'for': ['ruby','coffee','html','css', 'javascript', 'haml', 'scss', 'json'] }
 let g:syntastic_auto_jump           = 1
 let g:syntastic_error_symbol        = '✖'
 let g:syntastic_warning_symbol      = '►'
 let g:syntastic_javascript_checkers = ['jshint'   ]
+let g:syntastic_json_checkers       = ['jsonlint' ]
 let g:syntastic_html_checkers       = ['jshint'   ]
 let g:syntastic_ruby_checkers       = ['rubylint' ]
 let g:syntastic_haml_checkers       = ['haml-lint']
+let g:syntastic_coffee_checkers     = ['coffeelint']
 let g:syntastic_css_checkers        = ['csslint'  ]
 let g:syntastic_css_csslint_args    = "--ignore=zero-units"
 
@@ -198,8 +200,17 @@ Plug 'altercation/vim-colors-solarized'
 call plug#end()
 
 syntax on
-se t_Co=256
-let g:solarized_termcolors=256  
 set foldmethod=indent
-colorscheme solarized
-set background=light
+
+if has("gui_macvim")
+    set transparency=0
+    set guifont=Monaco:h17
+    let moria_monochrome = 1
+    let moria_style = 'white'
+    color moria
+else
+    set t_Co=256
+    let g:jellybeans_background_color_256=234
+    let g:solarized_termcolors=256
+    color jellybeans
+endif
