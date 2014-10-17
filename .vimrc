@@ -107,8 +107,11 @@ map <Leader>ts :read!date -u +"\%Y-\%m-\%dT\%H:\%M:\%S"<CR>
 call plug#begin('~/.vim/plugged')
 
 " General plugins
+Plug 'Shougo/vimproc.vim'
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/vimshell.vim'
 Plug 'kien/ctrlp.vim'
-Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter' 
 Plug 'mileszs/ack.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -130,7 +133,7 @@ if has('conceal')
 endif
 
 " CtrlP
-let g:ctrlp_custom_ignore = 'node_modules\|bower_components\|target'
+let g:ctrlp_custom_ignore = 'cssCache\|node_modules\|bower_components\|target'
 map <Leader>b :CtrlPBuffer<CR>
 " indentline settings
 let g:indentLine_enabled    = 0
@@ -144,6 +147,7 @@ let g:neocomplete#enable_at_startup = 1
 " inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " NerdTree
 map <Leader>e :NERDTreeToggle<CR>
+map <Leader>tc :NERDTreeCWD<CR>
 
 " Syntax plugins
 let b:current_syntax = "javascript"
@@ -162,6 +166,7 @@ Plug 'heavenshell/vim-jsdoc',      { 'for': 'js'     }
 Plug 'hail2u/vim-css3-syntax',     { 'for': ['html','css'] }
 Plug 'maksimr/vim-jsbeautify',     { 'for': ['html','css', 'js' ] }
 
+vnoremap <Leader>fbi :so ~/.vim/plugged/vim-jsbeautify/plugin/beautifier.vim<cr>
 vnoremap <Leader>fbh :call HtmlBeautify()<cr>
 vnoremap <Leader>fbc :call CSSBeautify()<cr>
 vnoremap <Leader>fbj :call JsBeautify()<cr>
@@ -203,14 +208,10 @@ syntax on
 set foldmethod=indent
 
 if has("gui_macvim")
-    set transparency=0
-    set guifont=Monaco:h17
-    let moria_monochrome = 1
-    let moria_style = 'white'
-    color moria
+    set guifont=Consolas:h13
+    highlight LineNr guifg=darkgrey
 else
     set t_Co=256
-    let g:jellybeans_background_color_256=234
-    let g:solarized_termcolors=256
-    color jellybeans
+    highlight LineNr ctermfg=darkgrey
 endif
+
