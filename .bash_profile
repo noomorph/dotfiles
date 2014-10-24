@@ -1,6 +1,6 @@
 alias v='vim'
 alias vi='vim'
-alias ll='ls -l'
+alias ll='ls -al'
 alias mvi='mvim'
 alias rss='newsbeuter -r'
 alias nvim='osascript ~/dotfiles/nvim.scpt'
