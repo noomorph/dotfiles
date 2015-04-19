@@ -2,10 +2,16 @@
 	name = Yaroslav Serhieiev
 	email = noomorph@gmail.com
 [push]
-	default = matching
+	default = simple
 [ui]
 	color = true
 [color]
 	ui = true
+[diff]
+	tool = vimdiff
+[merge]
+	tool = vimdiff
+[difftool]
+	prompt = false
 [credential]
 	helper = osxkeychain

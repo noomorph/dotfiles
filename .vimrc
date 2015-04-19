@@ -91,127 +91,29 @@ let &cpo = s:save_cpo | unlet s:save_cpo
 
 map <Leader>sj :set syntax=javascript<CR>
 map <Leader>sh :set syntax=html<CR>
-map <Leader>js :call jslibsyntax#load()<CR>
 map <Leader>fn :set nofoldenable<CR>
 map <Leader>fi :set foldmethod=indent<CR>
 map <Leader>i2 :set ts=2 sw=2 sts=2<CR>
 map <Leader>i4 :set ts=4 sw=4 sts=4<CR>
 map <Leader>cd :cd %:h<CR>
+map <Leader>c- :cd -<CR>
 map <Leader>cp :read!pbpaste<CR>
 map <Leader>cf :!cat % \| pbcopy<CR>
 map <Leader>cc :!pbcopy<CR>u
-map <Leader>sudo :w !sudo tee %<CR>
+map <Leader>sw :w !sudo tee %<CR>
 map <Leader>as :mksession! ~/auto.vimsession<CR>
 map <Leader>ts :read!date -u +"\%Y-\%m-\%dT\%H:\%M:\%S"<CR>
 
-call plug#begin('~/.vim/plugged')
-
-" General plugins
-Plug 'Shougo/vimproc.vim'
-Plug 'Shougo/unite.vim'
-Plug 'Shougo/vimshell.vim'
-Plug 'kien/ctrlp.vim'
-Plug 'airblade/vim-gitgutter' 
-Plug 'mileszs/ack.vim'
-Plug 'Yggdroot/indentLine'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'Shougo/neocomplete.vim'
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
-
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: "\<TAB>"
-
-" For snippet_complete marker.
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
-
-" CtrlP
-let g:ctrlp_custom_ignore = 'cssCache\|node_modules\|bower_components\|target'
-map <Leader>b :CtrlPBuffer<CR>
-" indentline settings
-let g:indentLine_enabled    = 0
-let g:indentLine_char       = '¦'
-let g:indentLine_color_term = 239
-let g:indentLine_color_gui  = '#A4E57E'
-nmap <Leader>i :IndentLinesToggle<CR>
-" neocomplete settings
-let g:neocomplete#enable_at_startup = 1
-" <TAB>: completion.
-" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" NerdTree
-map <Leader>e :NERDTreeToggle<CR>
-map <Leader>tc :NERDTreeCWD<CR>
-
-" Syntax plugins
-let b:current_syntax = "javascript"
-Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
-let g:used_javascript_libs = 'lodash, requirejs, jasmine, jquery'
-
-Plug 'tpope/vim-haml',             { 'for': 'haml'   }
-Plug 'wavded/vim-stylus',          { 'for': 'stylus' }
-Plug 'groenewege/vim-less',        { 'for': 'less'   }
-Plug 'digitaltoad/vim-jade',       { 'for': 'jade'   }
-Plug 'slim-template/vim-slim',     { 'for': 'slim'   }
-Plug 'othree/html5-syntax.vim',    { 'for': 'html'   }
-Plug 'kchmck/vim-coffee-script',   { 'for': 'coffee' }
-Plug 'cakebaker/scss-syntax.vim',  { 'for': 'scss'   }
-Plug 'heavenshell/vim-jsdoc',      { 'for': 'js'     }
-Plug 'hail2u/vim-css3-syntax',     { 'for': ['html','css'] }
-Plug 'maksimr/vim-jsbeautify',     { 'for': ['html','css', 'js' ] }
-
-vnoremap <Leader>fbi :so ~/.vim/plugged/vim-jsbeautify/plugin/beautifier.vim<cr>
-vnoremap <Leader>fbh :call HtmlBeautify()<cr>
-vnoremap <Leader>fbc :call CSSBeautify()<cr>
-vnoremap <Leader>fbj :call JsBeautify()<cr>
-vnoremap <Leader>fmh :!pandoc -s -f markdown -t html -o /tmp/email-pandoc.html && juice /tmp/email-pandoc.html /tmp/email-inlined.html && cat /tmp/email-inlined.html<cr>
-
-augroup VimCSS3Syntax
-  autocmd!
-  autocmd FileType css setlocal iskeyword+=-
-augroup END
-
-Plug 'Keithbsmiley/investigate.vim', { 'for': ['html','css', 'javascript'] }
-nnoremap <Leader>1 :call investigate#Investigate()<CR>
-Plug 'scrooloose/syntastic', { 'for': ['ruby','coffee','html','css', 'javascript', 'haml', 'scss', 'json'] }
-let g:syntastic_auto_jump           = 1
-let g:syntastic_error_symbol        = '✖'
-let g:syntastic_warning_symbol      = '►'
-let g:syntastic_javascript_checkers = ['jshint'   ]
-let g:syntastic_json_checkers       = ['jsonlint' ]
-let g:syntastic_html_checkers       = ['jshint'   ]
-let g:syntastic_ruby_checkers       = ['rubylint' ]
-let g:syntastic_haml_checkers       = ['haml-lint']
-let g:syntastic_coffee_checkers     = ['coffeelint']
-let g:syntastic_css_checkers        = ['csslint'  ]
-let g:syntastic_css_csslint_args    = "--ignore=zero-units"
-
-Plug 'moll/vim-node'
-Plug 'pangloss/vim-javascript',      { 'for': 'javascript' }
-Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
-let javascript_enable_domhtmlcss = 1
-let g:html_indent_inctags        = "html,body,head,tbody"
-let g:html_indent_script1        = "inc"
-let g:html_indent_style1         = "inc"
-
-Plug 'altercation/vim-colors-solarized'
-
-call plug#end()
+so ~/.vimplugged
 
 syntax on
-set foldmethod=indent
+color molokai
 
 if has("gui_macvim")
-    set guifont=Consolas:h13
-    highlight LineNr guifg=darkgrey
+    "highlight LineNr guifg=darkgrey
+    set guifont=Monaco:h12
+    set fullscreen
 else
     set t_Co=256
-    highlight LineNr ctermfg=darkgrey
+    "highlight LineNr ctermfg=darkgrey
 endif
-
