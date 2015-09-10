@@ -7,6 +7,7 @@ map <Leader>b :CtrlPBuffer<CR>
 
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+let g:gitgutter_max_signs = 5000
 
 Plug 'Yggdroot/indentLine'
 let g:indentLine_enabled    = 0
@@ -22,6 +23,7 @@ Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
 
+Plug 'groenewege/vim-less', { 'for': 'less' }
 Plug 'kchmck/vim-coffee-script',   { 'for': 'coffee' }
 Plug 'heavenshell/vim-jsdoc',   { 'for': 'javascript' }
 map <Leader>jd :JsDoc<CR>
@@ -41,8 +43,9 @@ vnoremap <Leader>fbh :call HtmlBeautify()<cr>
 vnoremap <Leader>fbc :call CSSBeautify()<cr>
 vnoremap <Leader>fbj :call JsBeautify()<cr>
 vnoremap <Leader>fmh :!pandoc -s -f markdown -t html -o /tmp/email-pandoc.html && juice /tmp/email-pandoc.html /tmp/email-inlined.html && cat /tmp/email-inlined.html<cr>
+map <Leader>md :!pandoc -s -f markdown -t html -o %f.html && juice %f.html %f.inlined.html && mv %f.inlined.html %f.html<cr>
 
-Plug 'scrooloose/syntastic', { 'for': ['ruby','coffee','html','css', 'javascript', 'haml', 'scss', 'json', 'typescript'] }
+Plug 'scrooloose/syntastic', { 'for': ['ruby','coffee','html','css', 'javascript', 'haml', 'scss', 'json', 'typescript', 'less'] }
 
 " set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
