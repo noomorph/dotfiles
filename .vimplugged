@@ -5,9 +5,17 @@ Plug 'kien/ctrlp.vim'
 let g:ctrlp_custom_ignore = 'cssCache\|node_modules\|bower_components\|target'
 map <Leader>b :CtrlPBuffer<CR>
 
+Plug 'Shougo/vimproc.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 let g:gitgutter_max_signs = 5000
+
+if has("nvim")
+else
+    Plug 'Valloric/YouCompleteMe'
+endif
+
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 
 Plug 'Yggdroot/indentLine'
 let g:indentLine_enabled    = 0
@@ -20,6 +28,9 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 map <Leader>e :NERDTreeToggle<CR>
 
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+Plug 'Quramy/tsuquyomi'
+autocmd FileType typescript setlocal completeopt+=menu,preview
+autocmd FileType typescript map <C-]> :TsuDefinition<CR>
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
 
@@ -30,13 +41,12 @@ map <Leader>jd :JsDoc<CR>
 
 Plug 'hail2u/vim-css3-syntax',     { 'for': ['html','css'] }
 
-Plug 'Valloric/YouCompleteMe'
-
 Plug 'marijnh/tern_for_vim',    { 'for': 'javascript' }
 let g:tern_map_keys=1
 let g:tern_show_argument_hints='on_hold'
 let tern#is_show_argument_hints_enabled=1
 autocmd FileType javascript setlocal omnifunc=tern#Complete
+autocmd FileType javascript map <C-]> :TernDef<CR>
 
 Plug 'maksimr/vim-jsbeautify',     { 'for': ['html','css', 'javascript' ] }
 vnoremap <Leader>fbh :call HtmlBeautify()<cr>
@@ -58,7 +68,9 @@ let g:syntastic_check_on_wq         = 1
 let g:syntastic_aggregate_errors    = 1
 let g:syntastic_error_symbol        = '✖'
 let g:syntastic_warning_symbol      = '►'
-let g:syntastic_javascript_checkers = ['jshint', 'eslint']
+let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_typescript_checkers = ['tslint', 'tsc']
+" let g:syntastic_typescript_tsc_args = "-t ES5"
 let g:syntastic_json_checkers       = ['jsonlint' ]
 let g:syntastic_html_checkers       = ['jshint'   ]
 let g:syntastic_ruby_checkers       = ['rubylint' ]
