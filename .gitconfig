@@ -1,6 +1,6 @@
 [user]
-	name = Yaroslav Serhieiev
 	email = noomorph@gmail.com
+	name = Yaroslav Serhieiev
 [push]
 	default = simple
 [ui]
@@ -15,3 +15,5 @@
 	prompt = false
 [credential]
 	helper = osxkeychain
+[commit]
+	gpgsign = true
