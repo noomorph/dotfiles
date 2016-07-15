@@ -17,7 +17,7 @@ if has("gui_macvim")
     highlight CursorLineNr guifg=black
 else
     set t_Co=256
-    color molokai
+    color gruvbox
     " hi Normal ctermbg=none
     "highlight LineNr ctermfg=darkgrey
 endif

@@ -5,6 +5,7 @@ Plug 'kien/ctrlp.vim'
 let g:ctrlp_custom_ignore = 'cssCache\|node_modules\|bower_components\|target'
 map <Leader>b :CtrlPBuffer<CR>
 
+Plug 'morhetz/gruvbox'
 Plug 'Shougo/vimproc.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -15,7 +16,7 @@ else
     Plug 'Valloric/YouCompleteMe'
 endif
 
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'othree/yajs.vim', { 'for': 'javascript' }
 
 Plug 'Yggdroot/indentLine'
 let g:indentLine_enabled    = 0
@@ -24,6 +25,7 @@ let g:indentLine_color_term = 239
 let g:indentLine_color_gui  = '#A4E57E'
 nmap <Leader>i :IndentLinesToggle<CR>
 
+let g:NERDTreeShowHidden=1
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 map <Leader>e :NERDTreeToggle<CR>
 
