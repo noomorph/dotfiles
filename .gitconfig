@@ -1,6 +1,9 @@
 [user]
 	email = noomorph@gmail.com
 	name = Yaroslav Serhieiev
+    # signingkey = 
+[pull]
+	rebase = true
 [push]
 	default = simple
 [ui]
@@ -17,3 +20,5 @@
 	helper = osxkeychain
 [commit]
 	gpgsign = true
+[core]
+    # editor = /usr/local/bin/vim

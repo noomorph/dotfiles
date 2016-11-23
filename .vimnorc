@@ -2,6 +2,8 @@ set shell=bash
 set nocompatible
 set nowrap
 set hlsearch
+set incsearch
+set smartcase
 set wildmenu
 set ruler
 set exrc
@@ -12,11 +14,11 @@ set number
 set relativenumber
 set splitbelow
 set splitright
-set clipboard=unnamed
+set foldmethod=syntax
+set dictionary=/usr/share/dict/web2
+" set clipboard=unnamed
 syntax on
 
-au FileType python setl sw=2 sts=2 ts=2 et
-au FileType coffee setl sw=2 sts=2 ts=2 et
 au BufRead,BufNewFile *.json set filetype=json
 au BufRead,BufNewFile *.rt set filetype=html
 

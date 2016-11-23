@@ -1,4 +1,5 @@
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+set -o vi
+
 alias v='nvim'
 alias vi='nvim'
 alias vim='nvim'
@@ -29,4 +30,19 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk$(javaversion).jdk/Content
 export M3_HOME=$(brew info maven | grep Cellar | tail -n1 | sed "s/ .*//")
 export M3=$M3_HOME/bin
 
-set -o vi
+load-nvmrc() {
+  if [[ -f .nvmrc && -r .nvmrc ]]; then
+    nvm use
+  elif [[ $(nvm version) != $(nvm version default)  ]]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+
+cd() { builtin cd "$@"; 'load-nvmrc'; }
+
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+    . `brew --prefix`/etc/bash_completion
+fi
+
+export PATH="/usr/local/sbin:$PATH"

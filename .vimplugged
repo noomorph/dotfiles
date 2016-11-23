@@ -1,21 +1,22 @@
 call plug#begin('~/.vim/plugged')
 
 " General plugins
+Plug 'editorconfig/editorconfig-vim'
 Plug 'kien/ctrlp.vim'
 let g:ctrlp_custom_ignore = 'cssCache\|node_modules\|bower_components\|target'
 map <Leader>b :CtrlPBuffer<CR>
 
 Plug 'morhetz/gruvbox'
-Plug 'Shougo/vimproc.vim'
+Plug 'Shougo/vimproc.vim', {'do': 'make'}
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 let g:gitgutter_max_signs = 5000
 
 if has("nvim")
-else
-    Plug 'Valloric/YouCompleteMe'
+    let g:python3_host_prog='/usr/local/bin/python3'
 endif
 
+Plug 'Valloric/YouCompleteMe'
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
 
 Plug 'Yggdroot/indentLine'
@@ -71,8 +72,8 @@ let g:syntastic_aggregate_errors    = 1
 let g:syntastic_error_symbol        = '✖'
 let g:syntastic_warning_symbol      = '►'
 let g:syntastic_javascript_checkers = ['eslint']
-" let g:syntastic_typescript_checkers = ['tslint', 'tsc']
-" let g:syntastic_typescript_tsc_args = "-t ES5"
+let g:tsuquyomi_disable_quickfix = 1
+let g:syntastic_typescript_checkers = ['tsuquyomi']
 let g:syntastic_json_checkers       = ['jsonlint' ]
 let g:syntastic_html_checkers       = ['jshint'   ]
 let g:syntastic_ruby_checkers       = ['rubylint' ]
@@ -86,5 +87,13 @@ map <Leader>0 :Errors<CR>
 Plug 'bling/vim-airline'
 let g:airline#extensions#tabline#enabled = 1
 " let g:airline_powerline_fonts = 1
+
+Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
+let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 
 call plug#end()
