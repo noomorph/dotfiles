@@ -1,4 +1,4 @@
-my-settings
+dotfiles @ noomorph
 ===========
 
-Autohotkey for Windows/Mac users, .vimrc
+My portable shell configuration. Bash, Vim, Tmux, etc...
