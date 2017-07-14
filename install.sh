@@ -1,7 +1,13 @@
 #!/bin/bash -v
 
 # APT
-# sudo apt-get install -y build-essential nodejs mc vim gvim git chromium ruby
+# sudo apt-get install -y build-essential nodejs mc vim gvim git chromium ruby tmux
+
+# SSH generation
+# ???
+
+# GnuPG generation
+# ???
 
 # VIM
 
@@ -19,3 +25,4 @@
 
 # JAVA
 # ???
+
