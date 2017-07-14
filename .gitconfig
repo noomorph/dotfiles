@@ -19,6 +19,6 @@
 [credential]
 	helper = osxkeychain
 [commit]
-	gpgsign = true
+	gpgsign = false
 [core]
     # editor = /usr/local/bin/vim

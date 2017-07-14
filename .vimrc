@@ -1,14 +1,13 @@
-so ~/.vimnorc
-so ~/.vimplugged
+" Uncomment the line below if you're using Python 3.x
+" let g:python3_host_prog='/usr/local/bin/python3'
 
-if has("gui_macvim")
-    set guifont=Fantasque\ Sans\ Mono:h14
-    " set transparency=0
-    " highlight LineNr guifg=darkblue
-    " highlight CursorLineNr guifg=black
-else
-    set t_Co=256
-endif
+" Heavy Profile
+" so ./.vim/profiles/plugged
 
+" Light Profile
+so ./.vim/profiles/light
+
+" Colors
+set t_Co=256
 set background=dark
-color gruvbox
+color gruvbox_noplugs
