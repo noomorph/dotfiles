@@ -1,7 +1,7 @@
 #!/bin/bash -v
 
 # APT
-# sudo apt-get install -y build-essential nodejs mc vim gvim git chromium ruby tmux
+# sudo apt-get install -y build-essential mc vim git tmux curl wget cmake python-dev python3-dev
 
 # SSH generation
 # ???
