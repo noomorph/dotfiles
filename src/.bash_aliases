@@ -8,6 +8,30 @@ function weather {
     curl wttr.in/$1
 }
 
+function bak()
+{
+    if [[ $# -ne 1 ]]; then
+        echo "You're doing it wrong. Usage: bak <filename>"
+    else
+        mv ${1} "${1}.bak"
+    fi
+}
+
+function unbak()
+{
+    if [[ $# -ne 1 ]]; then
+        echo "You're doing it wrong. Usage: unbak <filename>.bak"
+    else
+        echo ${1} | grep ".bak" &> /dev/null
+
+        if [[ $? -ne 0 ]]; then
+            echo "You're doing it wrong. File doesn't have .bak."
+        else
+            mv ${1} "${1%.*}"
+        fi
+    fi
+}
+
 # LINUX
 
 # alias pbcopy='xclip -selection clipboard'
