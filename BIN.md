@@ -18,3 +18,20 @@ Output:
 
 Example:
   convert2m4r my-audio.mp3 "Morning Tune"
+
+## `convert4tv`
+
+convert4tv - Convert a given URL or file to an MP4 format playable on TV
+
+Usage:
+  convert4tv input_url_or_file [output_file]
+
+Arguments:
+  input_url_or_file  Input URL or file to convert
+  output_file        Optional. Name of the output file (default: output.mp4)
+
+Output:
+  Generates an MP4 file compatible with picky TV players.
+
+Example:
+  convert4tv http://example.com/video.mp4 my_output.mp4

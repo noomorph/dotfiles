@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+show_help() {
+  cat <<EOF
+convert4tv - Convert a given URL or file to an MP4 format playable on TV
+
+Usage:
+  convert4tv input_url_or_file [output_file]
+
+Arguments:
+  input_url_or_file  Input URL or file to convert
+  output_file        Optional. Name of the output file (default: output.mp4)
+
+Output:
+  Generates an MP4 file compatible with picky TV players.
+
+Example:
+  convert4tv http://example.com/video.mp4 my_output.mp4
+EOF
+}
+
+# Show help if no args or --help/-h
+if [[ $# -lt 1 || "$1" == "--help" || "$1" == "-h" ]]; then
+  show_help
+  exit 0
+fi
+
+INPUT="$1"
+OUTPUT_FILE="${2:-output.mp4}"
+
+VIDEO_CODEC="-c:v libx264 -preset medium -crf 23 -profile:v high -pix_fmt yuv420p"
+AUDIO_CODEC="-c:a libmp3lame -b:a 128k"
+EXTRA_FLAGS="-movflags +faststart"
+
+if [[ "$INPUT" =~ ^https?:// ]]; then
+  echo "Downloading and converting from URL: $INPUT"
+  ffmpeg -i "$INPUT" $VIDEO_CODEC $AUDIO_CODEC $EXTRA_FLAGS "$OUTPUT_FILE"
+else
+  if [[ ! -f "$INPUT" ]]; then
+    echo " Input file not found: $INPUT" >&2
+    exit 2
+  fi
+  echo "Converting file: $INPUT"
+  ffmpeg -i "$INPUT" $VIDEO_CODEC $AUDIO_CODEC $EXTRA_FLAGS "$OUTPUT_FILE"
+fi
+
+# Check if the conversion was successful
+if [ $? -eq 0 ]; then
+  echo " Successfully processed $INPUT"
+else
+  echo " Error processing $INPUT"
+fi
